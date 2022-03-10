@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+        integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header class="p-6 text-white text-center text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-800">
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main class="flex">
+        <div class="flex w-1/3">
+            <!-- apply a bottom border to this div -->
+            <form>
+                <h2 class="p-2 text-xl font-extrabold">Search for a City:</h2>
+                <input name="city-search" id="city-search" type="text" autofocus="true" class="form-input border" />
+                <button class="btn border font-semibold px-2 py-1 bg-sky-600" id="search-form" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="recent-cities ">
+            <!--This is for recent city buttons, there should be 8 of them total; get the first one working and then copy/paste to populate the rest of them-->
+            <button class="btn" type="submit"></button>
+
+        </div>
+        <div class="current-conditions flex w 2/3">
+            <h1 id="city-name" id="date">Current Weather</h1>
+            <ul id="weather-data">
+                <li id="temperature">temperature</li>
+                <li id="wind">wind</li>
+                <li id="humidity">humidity</li>
+                <li id="uv-index">uv-index</li>
+            </ul>
+        </div>
+        <div class="five-day w-2/3">
+            <h1>5-Day Forecast:</h1>
+            <div class="weather-card-container flex justify-between">
+                <!--This is for the 5 Day forecast cards - obivously there should be five of them bet get this one working first and then copy/paste as needed.-->                
+                <ul class="weather-card text-white bg-blue-800 p8" id="day-one">
+                    <li>date</li>
+                    <li>weather icon</li>
+                    <li>temp</li>
+                    <li>wind</li>
+                    <li>humidity</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="./assets/js/weather.js"></script>
+</body>
+
+</html>
