@@ -1,0 +1,9 @@
+header {
+    background-image: linear-gradient(to right, rgb(0, 128, 255), rgb(12, 3, 98));
+}
+.forecast {
+    background: rgb(12, 3, 98);
+}
+ul {
+    list-style-type: none;
+}
