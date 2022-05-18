@@ -132,11 +132,11 @@ function getFiveDayForecast(lattitude, longitude) {
 // ===========Serch Button Variables & Event Listener============
 var searchButton = document.getElementById("search-form");
 var searchResult = document.getElementById("city-search");
+var searchHistory = localStorage.setItem(searchResult, )
 // console.log(searchResult);
 
 searchButton.addEventListener("click", function (event) {
   event.preventDefault();
   getCurrentWeather(searchResult.value);
-  localStorage.setItem(searchResult);
 });
 
