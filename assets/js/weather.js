@@ -96,8 +96,6 @@ function getFiveDayForecast(lattitude, longitude) {
     })
     .then(function (data) {
       // console.log(data)
-      
-      
       // Get UV index for Current Weather functions above
       var spanEl = document.createElement('span');
       spanEl.textContent = data.current.uvi;
@@ -115,10 +113,6 @@ function getFiveDayForecast(lattitude, longitude) {
       }
       currentWeatherUv.innerHTML="UV Index: " 
       currentWeatherUv.appendChild(spanEl);
-
-
-      
-      
       // Get forecast data
       // console.log(data.daily[1].dt);
       // Get forecast data Dates for five days
@@ -129,10 +123,16 @@ function getFiveDayForecast(lattitude, longitude) {
       day5Date.textContent=moment.unix(data.daily[5].dt).format("MM/DD/YYYY");
       // Get forecast data icons for five days
       var day1IconCode = data.daily[1].weather[0].icon;
-      console.log(day1IconCode)
-      // document.getElementById('day-one-weather-icon').src = "http://openweathermap.org/img/wn/"+day1IconCode+"@2x.png";
+      // console.log(day1IconCode)
       day1Icon.src="http://openweathermap.org/img/wn/"+day1IconCode+".png";
-
+      var day2IconCode = data.daily[2].weather[0].icon;
+      day2Icon.src="http://openweathermap.org/img/wn/"+day2IconCode+".png";
+      var day3IconCode = data.daily[3].weather[0].icon;
+      day3Icon.src="http://openweathermap.org/img/wn/"+day3IconCode+".png";
+      var day4IconCode = data.daily[4].weather[0].icon;
+      day4Icon.src="http://openweathermap.org/img/wn/"+day4IconCode+".png";
+      var day5IconCode = data.daily[5].weather[0].icon;
+      day5Icon.src="http://openweathermap.org/img/wn/"+day5IconCode+".png";
       // Get forecast data temp for five days
       day1Temp.textContent="Temp: " + data.daily[1].temp.day + "\u00B0 F";
       day2Temp.textContent="Temp: " + data.daily[2].temp.day + "\u00B0 F";
