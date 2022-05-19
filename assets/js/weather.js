@@ -1,4 +1,9 @@
-
+var searchHistory = [];
+var oldSearches = JSON.parse(localStorage.getItem("city:"))
+if (oldSearches !== null) {
+  searchHistory = oldSearches
+}
+// console.log(oldSearches);
 // ===========Current Weather Variables============
 var currentWeatherTemp = document.getElementById("temperature");
 var currentWeatherSpeed = document.getElementById("wind");
@@ -63,14 +68,15 @@ function getCurrentWeather(cityName) {
       }
     })
     .then(function (data) {
-     console.log(data);
+    //  console.log(data);
       var iconCode = data.weather[0].icon;
       var formatTime = moment.unix(data.dt).format("MM/DD/YYYY");
       cityNameEl.innerHTML = `${data.name} ${formatTime} <img src=http://openweathermap.org/img/w/${iconCode}.png />`;
       currentWeatherTemp.textContent = "Temp: " + data.main.temp + "\u00B0 F";
       currentWeatherSpeed.textContent = "Wind: " + data.wind.speed + " MPH";
       currentWeatherHumidity.textContent = "Humidity: " + data.main.humidity + "%";
-      // console.log(data);
+      
+        // console.log(data);
       // console.log(data.main.temp);
       // console.log(data.wind.speed);
       // console.log(data.main.humidity);
@@ -89,11 +95,32 @@ function getFiveDayForecast(lattitude, longitude) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
+      // console.log(data)
+      
+      
       // Get UV index for Current Weather functions above
-      currentWeatherUv.textContent = "UV Index: " + data.current.uvi;
+      var spanEl = document.createElement('span');
+      spanEl.textContent = data.current.uvi;
+      if (data.current.uvi < 2) {
+        spanEl.style.backgroundColor = "green"
+      }
+      else if (data.current.uvi < 5) {
+        spanEl.style.backgroundColor = "yellow"
+      }
+      else if (data.current.uvi < 7) {
+        spanEl.style.backgroundColor = "orange"
+      }
+      else {
+        spanEl.style.backgroundColor = "red"
+      }
+      currentWeatherUv.innerHTML="UV Index: " 
+      currentWeatherUv.appendChild(spanEl);
+
+
+      
+      
       // Get forecast data
-      console.log(data.daily[1].dt);
+      // console.log(data.daily[1].dt);
       // Get forecast data Dates for five days
       day1Date.textContent=moment.unix(data.daily[1].dt).format("MM/DD/YYYY");
       day2Date.textContent=moment.unix(data.daily[2].dt).format("MM/DD/YYYY");
@@ -102,9 +129,9 @@ function getFiveDayForecast(lattitude, longitude) {
       day5Date.textContent=moment.unix(data.daily[5].dt).format("MM/DD/YYYY");
       // Get forecast data icons for five days
       var day1IconCode = data.daily[1].weather[0].icon;
-      // console.log(day1IconCode)
+      console.log(day1IconCode)
       // document.getElementById('day-one-weather-icon').src = "http://openweathermap.org/img/wn/"+day1IconCode+"@2x.png";
-      day1Icon.textContent.src="http://openweathermap.org/img/wn/"+day1IconCode+"@2x.png";
+      day1Icon.src="http://openweathermap.org/img/wn/"+day1IconCode+".png";
 
       // Get forecast data temp for five days
       day1Temp.textContent="Temp: " + data.daily[1].temp.day + "\u00B0 F";
@@ -129,14 +156,26 @@ function getFiveDayForecast(lattitude, longitude) {
     });
 }
 
+
+
 // ===========Serch Button Variables & Event Listener============
 var searchButton = document.getElementById("search-form");
 var searchResult = document.getElementById("city-search");
-var searchHistory = localStorage.setItem(searchResult, )
-// console.log(searchResult);
+console.log(searchResult);
 
 searchButton.addEventListener("click", function (event) {
   event.preventDefault();
   getCurrentWeather(searchResult.value);
+  searchHistory.push(searchResult.value);
+  localStorage.setItem("city:", JSON.stringify(searchHistory));
 });
 
+var newSearch = () =>  {
+  var newSearchButtonEl=document.createElement("button");
+  newSearchButtonEl.setAttribute("type", "click");
+  newSearchButtonEl.className="col-12 btn-lg btn-secondary mt-2"
+  var recentCitiesSearch=document.getElementById("recent-cities")
+  var recentCitiesSearchBtn = document.createElement("button");
+  recentCitiesSearchBtn.innerHTML = localStorage.getItem("city");
+
+}
